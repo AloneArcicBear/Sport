@@ -13,7 +13,7 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
 |--------------|-------------------------------------------------------------|
 | `index.html` | Seitenstruktur                                              |
 | `style.css`  | Design, Hell- und Dunkelmodus über `prefers-color-scheme`   |
-| `app.js`     | Ziehen, Würfeln, Stoppuhr, Übungsdaten                      |
+| `app.js`     | Ziehen, Würfeln, Übungsdaten                                |
 | `bilder/`    | 16 Strichzeichnungen, `01.png` bis `16.png`                 |
 
 ## Lokal ausprobieren
@@ -40,8 +40,7 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
 3. Die Lehrkraft tippt auf **Ziehen**: es erscheint eine Übung mit Abbildung
    plus Würfelzahl.
    * Würfel **gerade** → dynamisch, 15–20 langsame Wiederholungen pro Seite.
-   * Würfel **ungerade** → statisch, 30 Sekunden pro Seite halten
-     (dafür gibt es den Stoppuhr-Knopf).
+   * Würfel **ungerade** → statisch, 30 Sekunden pro Seite halten.
    * Dazu erscheint die Kurzanleitung, passend zum Würfel. Die jeweils andere
      Variante lässt sich darunter aufklappen.
 4. Alle machen die Übung mit und kreuzen die Zahl auf ihrer Karte an.
@@ -67,6 +66,9 @@ sicher neu geladen.
 
 ## Technische Hinweise
 
+* Alle 16 Abbildungen werden beim Seitenstart vorgeladen (zusammen rund 32 KB).
+  Sonst wird erst im Moment des Ziehens geladen, und bei langsamer Verbindung
+  bleibt die Stelle kurz leer.
 * Die Strichzeichnungen stammen aus `Stretching_Bingo.pdf` und liegen als
   PNG mit transparentem Hintergrund vor. Im Dunkelmodus werden sie per
   CSS-Filter invertiert, damit die Striche hell erscheinen.

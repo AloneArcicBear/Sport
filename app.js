@@ -6,7 +6,6 @@
 (() => {
   const COUNT = 16;
   const STORE_KEY = 'dehn-bingo.v2';
-  const TIMER_MS = 30000;
 
   // Name und Kurzanleitung je Übung (aus der Übungskarten-Übersicht).
   const EXERCISES = [
@@ -187,7 +186,6 @@
       figur.className = 'figur';
       figur.src = imagePath(i);
       figur.alt = '';
-      figur.loading = 'lazy';
       const label = document.createElement('span');
       label.className = 'name';
       label.textContent = exercise.name;
@@ -208,7 +206,6 @@
   }
 
   function draw() {
-    stopTimer();
     let newRound = false;
     if (state.pool.length === 0) {
       newRound = state.drawn.length > 0;
@@ -219,66 +216,16 @@
     state.current = { ex, die: rollDie() };
     state.roundNote = newRound ? 'Neue Runde: alle 16 waren dran, neu gemischt.' : '';
     el('drawOther').open = false;
-    resetTimerDisplay();
     render();
     save();
   }
 
   function manualShuffle() {
-    stopTimer();
     reshuffle();
     state.current = null;
     state.roundNote = 'Neu gemischt, alle 16 Übungen sind wieder dabei.';
-    resetTimerDisplay();
     render();
     save();
-  }
-
-  /* ===================== Stoppuhr ===================== */
-
-  let timerId = null;
-  let timerEnd = 0;
-
-  function formatLeft(ms) {
-    const seconds = Math.max(0, ms) / 1000;
-    return seconds.toFixed(1).replace('.', ',') + ' s';
-  }
-
-  function tick() {
-    const left = timerEnd - Date.now();
-    el('timerDisplay').textContent = formatLeft(left);
-    if (left <= 0) {
-      stopTimer();
-      el('timerDisplay').textContent = '0,0 s';
-      el('timerStatus').textContent = 'Zeit um – Seite wechseln!';
-    }
-  }
-
-  function startTimer() {
-    stopTimer();
-    timerEnd = Date.now() + TIMER_MS;
-    el('timerStatus').textContent = '';
-    el('btnTimer').textContent = 'Stopp';
-    el('btnTimer').setAttribute('aria-pressed', 'true');
-    timerId = setInterval(tick, 100);
-    tick();
-  }
-
-  function stopTimer() {
-    if (timerId !== null) {
-      clearInterval(timerId);
-      timerId = null;
-    }
-    const button = el('btnTimer');
-    if (button) {
-      button.textContent = '30 s starten';
-      button.setAttribute('aria-pressed', 'false');
-    }
-  }
-
-  function resetTimerDisplay() {
-    el('timerDisplay').textContent = formatLeft(TIMER_MS);
-    el('timerStatus').textContent = '';
   }
 
   /* ===================== Anzeige ===================== */
@@ -304,7 +251,6 @@
       el('drawOtherText').textContent = dynamic ? exercise.statisch : exercise.dynamisch;
       el('drawOther').hidden = false;
       el('drawHint').textContent = 'Kreuze die ' + (current.ex + 1) + ' auf deiner Karte an.';
-      el('timerBox').hidden = dynamic;
     } else {
       el('drawTitle').textContent = 'Noch keine Übung gezogen.';
       image.removeAttribute('src');
@@ -315,7 +261,6 @@
       el('drawOtherText').textContent = '';
       el('drawOther').hidden = true;
       el('drawHint').textContent = '';
-      el('timerBox').hidden = true;
     }
 
     el('poolInfo').textContent = (state.pool.length + ' von ' + COUNT
@@ -332,19 +277,23 @@
 
   /* ===================== Start ===================== */
 
+  // Alle Abbildungen sofort holen (zusammen rund 32 KB), damit beim Ziehen
+  // nichts nachgeladen werden muss und keine Lücke entsteht.
+  function preloadImages() {
+    for (let i = 0; i < COUNT; i++) {
+      const img = new Image();
+      img.src = imagePath(i);
+    }
+  }
+
   function init() {
     buildList();
+    preloadImages();
     load();
     if (state.pool.length === 0 && state.drawn.length === 0) reshuffle();
 
     el('btnDraw').addEventListener('click', draw);
     el('btnShuffle').addEventListener('click', manualShuffle);
-    el('btnTimer').addEventListener('click', () => {
-      if (timerId === null) startTimer();
-      else { stopTimer(); resetTimerDisplay(); }
-    });
-
-    resetTimerDisplay();
     render();
   }
 
