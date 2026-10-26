@@ -7,7 +7,7 @@
 <meta name="color-scheme" content="light dark">
 <title>Dehn-Bingo</title>
 <meta name="description" content="Dehn-Bingo für die Sportstunde: Übung ziehen, würfeln, Abbildung und Kurzanleitung anzeigen.">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 <div class="wrap">
@@ -25,7 +25,10 @@
     <h2 id="h-ziehen">1. Übung ziehen</h2>
 
     <div class="draw" id="drawBox" aria-live="polite">
-      <p class="draw__title" id="drawTitle">Noch keine Übung gezogen.</p>
+      <p class="draw__title">
+        <span class="draw__nr" id="drawNr" hidden></span>
+        <span class="draw__name" id="drawName">Noch keine Übung gezogen.</span>
+      </p>
       <img class="draw__img" id="drawImage" src="" alt="" hidden>
       <div class="varianten" id="varianten" hidden>
         <div class="variante">
@@ -72,6 +75,6 @@
   </footer>
 
 </div>
-<script src="app.js?v=5" defer></script>
+<script src="app.js?v=6" defer></script>
 </body>
 </html>

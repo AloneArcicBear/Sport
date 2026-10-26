@@ -224,7 +224,9 @@
 
     if (gezogen) {
       const exercise = EXERCISES[current];
-      el('drawTitle').textContent = 'Nr. ' + (current + 1) + ' – ' + exercise.name;
+      el('drawNr').textContent = String(current + 1);
+      el('drawNr').hidden = false;
+      el('drawName').textContent = exercise.name;
       image.src = imagePath(current);
       image.hidden = false;
       el('textStatisch').textContent = exercise.statisch;
@@ -232,7 +234,9 @@
       el('varianten').hidden = false;
       el('drawHint').textContent = 'Kreuze die ' + (current + 1) + ' auf deiner Karte an.';
     } else {
-      el('drawTitle').textContent = 'Noch keine Übung gezogen.';
+      el('drawNr').textContent = '';
+      el('drawNr').hidden = true;
+      el('drawName').textContent = 'Noch keine Übung gezogen.';
       image.removeAttribute('src');
       image.hidden = true;
       el('textStatisch').textContent = '';

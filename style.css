@@ -118,7 +118,29 @@ section {
 }
 
 .draw p { margin: 0; }
-.draw__title { font-size: 1.2rem; font-weight: 700; line-height: 1.25; }
+.draw__title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+/* Die gezogene Nummer ist das, was alle auf ihrer Karte suchen. */
+.draw__nr {
+  flex: 0 0 auto;
+  min-width: 56px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 2.25rem;
+  font-weight: 800;
+  line-height: 1.1;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
 .draw__img {
   display: block;
   width: 100%;
