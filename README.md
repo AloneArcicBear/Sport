@@ -50,6 +50,21 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
 Es wird ohne Wiederholung gezogen. Nach allen 16 Übungen mischt die Seite
 automatisch neu; „Neu mischen“ startet die Runde auch vorher neu.
 
+## Nach einer Änderung an app.js oder style.css
+
+In `index.html` die Versionsnummer hochzählen:
+
+```html
+<link rel="stylesheet" href="style.css?v=3">
+<script src="app.js?v=3" defer></script>
+```
+
+GitHub Pages liefert alle Dateien mit `cache-control: max-age=600` aus. Ohne
+die Nummer kann ein Browser bis zu zehn Minuten lang das neue `index.html` mit
+einem alten `app.js` kombinieren – dann bricht das Skript ab und keine Taste
+reagiert mehr. Die Nummer ist für den Browser eine neue Adresse, also wird
+sicher neu geladen.
+
 ## Technische Hinweise
 
 * Die Strichzeichnungen stammen aus `Stretching_Bingo.pdf` und liegen als
