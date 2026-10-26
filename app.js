@@ -183,10 +183,15 @@
       const num = document.createElement('span');
       num.className = 'n';
       num.textContent = String(i + 1);
+      const figur = document.createElement('img');
+      figur.className = 'figur';
+      figur.src = imagePath(i);
+      figur.alt = '';
+      figur.loading = 'lazy';
       const label = document.createElement('span');
       label.className = 'name';
       label.textContent = exercise.name;
-      li.append(num, label);
+      li.append(num, figur, label);
       frag.append(li);
       listItems.push(li);
     });

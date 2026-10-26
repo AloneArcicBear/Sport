@@ -33,7 +33,8 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
 
 ## So wird gespielt
 
-1. Jede Übung hat eine Nummer von 1 bis 16 (Liste in Abschnitt 2 der Seite).
+1. Jede Übung hat eine Nummer von 1 bis 16 (Liste mit Abbildungen in
+   Abschnitt 2 der Seite).
 2. Alle tragen die Zahlen 1–16 selbst in ihre Papier-Bingokarte ein,
    jede Zahl genau einmal.
 3. Die Lehrkraft tippt auf **Ziehen**: es erscheint eine Übung mit Abbildung
