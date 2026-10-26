@@ -2,8 +2,8 @@
 # Dehn-Bingo
 
 Kleine statische Seite für eine Sportstunde zum Thema Stretching. Die Bingokarte
-liegt auf Papier – die Seite zieht die Übungen, würfelt dazu und zeigt
-Abbildung und Kurzanleitung. Gedacht für Handys.
+liegt auf Papier und gewürfelt wird mit einem echten Würfel – die Seite zieht
+nur die Übung und zeigt Abbildung und Kurzanleitung. Gedacht für Handys.
 
 Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibliotheken.
 
@@ -13,7 +13,7 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
 |--------------|-------------------------------------------------------------|
 | `index.html` | Seitenstruktur                                              |
 | `style.css`  | Design, Hell- und Dunkelmodus über `prefers-color-scheme`   |
-| `app.js`     | Ziehen, Würfeln, Übungsdaten                                |
+| `app.js`     | Ziehen der Übungen, Übungsdaten                             |
 | `bilder/`    | 16 Strichzeichnungen, `01.png` bis `16.png`                 |
 
 ## Lokal ausprobieren
@@ -37,14 +37,13 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
    Abschnitt 2 der Seite).
 2. Alle tragen die Zahlen 1–16 selbst in ihre Papier-Bingokarte ein,
    jede Zahl genau einmal.
-3. Die Lehrkraft tippt auf **Ziehen**: es erscheint eine Übung mit Abbildung.
-   Im Hintergrund wird gewürfelt, die Zahl selbst wird nicht angezeigt.
-   * Würfel **gerade** → dynamisch, 15–20 langsame Wiederholungen pro Seite.
-   * Würfel **ungerade** → statisch, 30 Sekunden pro Seite halten.
-   * Dazu erscheint die Kurzanleitung, passend zum Würfel. Die jeweils andere
-     Variante lässt sich darunter aufklappen.
-4. Alle machen die Übung mit und kreuzen die Zahl auf ihrer Karte an.
-5. Vier Kreuze in einer Reihe, Spalte oder Diagonale = **Bingo!**
+3. Die Lehrkraft tippt auf **Ziehen**: es erscheint die Übung mit Abbildung
+   und beiden Varianten.
+4. Jede Person würfelt selbst mit einem echten Würfel:
+   * **gerade** → dynamisch, 15–20 langsame Wiederholungen pro Seite
+   * **ungerade** → statisch, 30 Sekunden pro Seite halten
+5. Übung machen und die Zahl auf der Karte ankreuzen.
+6. Vier Kreuze in einer Reihe, Spalte oder Diagonale = **Bingo!**
 
 Es wird ohne Wiederholung gezogen. Nach allen 16 Übungen mischt die Seite
 automatisch neu; „Neu mischen“ startet die Runde auch vorher neu.

@@ -5,7 +5,7 @@
 
 (() => {
   const COUNT = 16;
-  const STORE_KEY = 'dehn-bingo.v2';
+  const STORE_KEY = 'dehn-bingo.v3';
 
   // Name und Kurzanleitung je Übung (aus der Übungskarten-Übersicht).
   const EXERCISES = [
@@ -104,15 +104,6 @@
     return a;
   }
 
-  function rollDie() {
-    return 1 + Math.floor(Math.random() * 6);
-  }
-
-  // Gerade Würfelzahl = dynamisch, ungerade = statisch.
-  function isDynamic(die) {
-    return Number(die) % 2 === 0;
-  }
-
   // Strichzeichnung zur Übung, 0-basierter Index.
   function imagePath(index) {
     return 'bilder/' + ('0' + (index + 1)).slice(-2) + '.png';
@@ -120,7 +111,7 @@
 
   // Für das Node-Testskript. Im Browser ist "module" nicht definiert.
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { COUNT, EXERCISES, shuffled, rollDie, isDynamic, imagePath };
+    module.exports = { COUNT, EXERCISES, shuffled, imagePath };
   }
 
   if (typeof document === 'undefined') return;
@@ -130,7 +121,7 @@
   const state = {
     pool: [],        // noch nicht gezogene Übungen dieser Runde
     drawn: [],       // bereits gezogene Übungen dieser Runde
-    current: null,   // { ex: Index, die: 1..6 }
+    current: null,   // Index der gezogenen Übung, oder null
     roundNote: ''
   };
 
@@ -161,10 +152,7 @@
       const inRange = (n) => Number.isInteger(n) && n >= 0 && n < COUNT;
       if (Array.isArray(data.pool)) state.pool = data.pool.filter(inRange);
       if (Array.isArray(data.drawn)) state.drawn = data.drawn.filter(inRange);
-      if (data.current && inRange(data.current.ex)) {
-        const die = Number(data.current.die);
-        state.current = { ex: data.current.ex, die: die >= 1 && die <= 6 ? die : 1 };
-      }
+      if (inRange(data.current)) state.current = data.current;
     } catch (err) {
       /* Kaputte Daten einfach ignorieren. */
     }
@@ -213,9 +201,8 @@
     }
     const ex = state.pool.pop();
     state.drawn.push(ex);
-    state.current = { ex, die: rollDie() };
+    state.current = ex;
     state.roundNote = newRound ? 'Neue Runde: alle 16 waren dran, neu gemischt.' : '';
-    el('drawOther').open = false;
     render();
     save();
   }
@@ -233,31 +220,24 @@
   function render() {
     const current = state.current;
     const image = el('drawImage');
+    const gezogen = current !== null;
 
-    if (current) {
-      const dynamic = isDynamic(current.die);
-      const exercise = EXERCISES[current.ex];
-      el('drawTitle').textContent = 'Nr. ' + (current.ex + 1) + ' – ' + exercise.name;
-      image.src = imagePath(current.ex);
+    if (gezogen) {
+      const exercise = EXERCISES[current];
+      el('drawTitle').textContent = 'Nr. ' + (current + 1) + ' – ' + exercise.name;
+      image.src = imagePath(current);
       image.hidden = false;
-      el('drawTask').textContent = dynamic
-        ? 'Dynamisch: 15–20 langsame Wiederholungen pro Seite.'
-        : 'Statisch: 30 Sekunden pro Seite halten.';
-      el('drawHow').textContent = dynamic ? exercise.dynamisch : exercise.statisch;
-      el('drawOtherSummary').textContent = dynamic
-        ? 'Statische Variante anzeigen'
-        : 'Dynamische Variante anzeigen';
-      el('drawOtherText').textContent = dynamic ? exercise.statisch : exercise.dynamisch;
-      el('drawOther').hidden = false;
-      el('drawHint').textContent = 'Kreuze die ' + (current.ex + 1) + ' auf deiner Karte an.';
+      el('textStatisch').textContent = exercise.statisch;
+      el('textDynamisch').textContent = exercise.dynamisch;
+      el('varianten').hidden = false;
+      el('drawHint').textContent = 'Kreuze die ' + (current + 1) + ' auf deiner Karte an.';
     } else {
       el('drawTitle').textContent = 'Noch keine Übung gezogen.';
       image.removeAttribute('src');
       image.hidden = true;
-      el('drawTask').textContent = '';
-      el('drawHow').textContent = '';
-      el('drawOtherText').textContent = '';
-      el('drawOther').hidden = true;
+      el('textStatisch').textContent = '';
+      el('textDynamisch').textContent = '';
+      el('varianten').hidden = true;
       el('drawHint').textContent = '';
     }
 
@@ -266,7 +246,7 @@
 
     listItems.forEach((li, i) => {
       li.classList.toggle('is-drawn', state.drawn.indexOf(i) !== -1);
-      const isCurrent = Boolean(current) && current.ex === i;
+      const isCurrent = gezogen && current === i;
       li.classList.toggle('is-current', isCurrent);
       if (isCurrent) li.setAttribute('aria-current', 'true');
       else li.removeAttribute('aria-current');

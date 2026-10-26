@@ -129,36 +129,22 @@ section {
   margin: 10px auto 4px;
 }
 
-.draw__task { margin-top: 6px !important; font-weight: 600; }
-.draw__how { margin-top: 6px !important; }
-.draw__hint { margin-top: 6px !important; color: var(--muted); font-size: 0.9375rem; }
+.draw__hint { margin-top: 10px !important; color: var(--muted); font-size: 0.9375rem; }
 
-.draw__other { margin-top: 8px; }
-.draw__other summary {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 36px;
-  list-style: none;
-  color: var(--muted);
-  font-size: 0.9375rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-.draw__other summary::-webkit-details-marker { display: none; }
+.varianten { margin-top: 10px; }
 
-.draw__other summary::after {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-right: 2px solid var(--muted);
-  border-bottom: 2px solid var(--muted);
-  transform: translateY(-3px) rotate(45deg);
+.variante {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
 }
 
-.draw__other[open] summary::after { transform: translateY(1px) rotate(-135deg); }
+.draw .variante p { margin: 0 0 3px; }
+.draw .variante p:last-child { margin-bottom: 0; }
 
-.draw__other p { margin-top: 2px !important; color: var(--muted); font-size: 0.9375rem; }
+.variante__kopf { color: var(--accent); font-weight: 700; font-size: 0.875rem; }
+.variante__regel { font-weight: 600; }
+
 
 /* ---------- Übungsliste ---------- */
 
