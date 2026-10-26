@@ -1,0 +1,91 @@
+<!--#claude-->
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Dehn-Bingo</title>
+<meta name="description" content="Dehn-Bingo für die Sportstunde: 4×4-Bingokarte, Übung ziehen und würfeln.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="mode-edit">
+<div class="wrap">
+
+  <header class="head">
+    <h1>Dehn-Bingo</h1>
+    <p class="lead">16 Dehnübungen, eine 4×4-Karte. Trage die Zahlen 1–16 in beliebiger Reihenfolge ein, dann wird gezogen.</p>
+  </header>
+
+  <noscript>
+    <p class="warn">Diese Seite braucht JavaScript. Bitte JavaScript im Browser erlauben.</p>
+  </noscript>
+
+  <section aria-labelledby="h-karte">
+    <h2 id="h-karte">1. Bingokarte</h2>
+
+    <div class="row">
+      <button type="button" class="btn btn--primary" id="btnMode" aria-pressed="false">Spielen starten</button>
+    </div>
+    <p class="hint" id="modeHint">Zahlen eintragen: tippe in ein Feld und schreibe eine Zahl von 1 bis 16.</p>
+
+    <div class="card" id="grid" role="group" aria-label="Bingokarte, 4 mal 4 Felder"></div>
+
+    <p class="banner" id="bingoBanner" role="status" hidden></p>
+    <p class="warn" id="warnBox" role="status" hidden></p>
+    <p class="hint" id="cardStatus">0 von 16 Feldern gefüllt.</p>
+
+    <div class="row">
+      <button type="button" class="btn" id="btnRandom">Zufällig füllen</button>
+      <button type="button" class="btn" id="btnClearCard">Karte leeren</button>
+      <button type="button" class="btn" id="btnClearMarks">Kreuze löschen</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-ziehen">
+    <h2 id="h-ziehen">2. Ziehen und Würfeln</h2>
+
+    <div class="draw" id="drawBox" aria-live="polite">
+      <p class="draw__title" id="drawTitle">Noch keine Übung gezogen.</p>
+      <p class="draw__die" id="drawDie"></p>
+      <p class="draw__task" id="drawTask"></p>
+      <p class="draw__hint" id="drawHint"></p>
+    </div>
+
+    <div class="timer" id="timerBox" hidden>
+      <button type="button" class="btn" id="btnTimer" aria-pressed="false">30 s starten</button>
+      <span class="timer__display" id="timerDisplay" role="timer" aria-live="off">30,0 s</span>
+      <span class="timer__status" id="timerStatus" role="status"></span>
+    </div>
+
+    <p class="hint" id="poolInfo">16 von 16 Übungen sind noch in dieser Runde.</p>
+
+    <div class="row">
+      <button type="button" class="btn btn--primary" id="btnDraw">Ziehen</button>
+      <button type="button" class="btn" id="btnShuffle">Neu mischen</button>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-liste">
+    <h2 id="h-liste">3. Die 16 Übungen</h2>
+    <ol class="exercises" id="exerciseList"></ol>
+  </section>
+
+  <footer class="foot">
+    <details>
+      <summary>So geht’s</summary>
+      <ul>
+        <li>Jede Übung hat eine Nummer von 1 bis 16 (Liste oben).</li>
+        <li>Jede Person trägt die Zahlen 1–16 selbst in die Karte ein, jede Zahl genau einmal.</li>
+        <li>Die Lehrkraft tippt auf „Ziehen“. Alle machen die Übung und kreuzen die Zahl auf ihrer Karte an.</li>
+        <li>Würfel gerade = dynamisch: 15–20 langsame Wiederholungen pro Seite.</li>
+        <li>Würfel ungerade = statisch: 30 Sekunden pro Seite halten.</li>
+        <li>Vier Kreuze in einer Reihe, Spalte oder Diagonale = Bingo!</li>
+      </ul>
+    </details>
+  </footer>
+
+</div>
+<script src="app.js" defer></script>
+</body>
+</html>
