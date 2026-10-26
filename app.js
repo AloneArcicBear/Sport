@@ -261,16 +261,27 @@
 
   // Alle Abbildungen sofort holen (zusammen rund 32 KB), damit beim Ziehen
   // nichts nachgeladen werden muss und keine Lücke entsteht.
+  const vorgeladen = [];
+
   function preloadImages() {
     for (let i = 0; i < COUNT; i++) {
       const img = new Image();
       img.src = imagePath(i);
+      vorgeladen.push(img);   // festhalten, sonst darf der Browser abbrechen
     }
+  }
+
+  // Zeigt unten an, welche Fassung der Browser gerade geladen hat.
+  function showVersion() {
+    const script = document.querySelector('script[src*="app.js"]');
+    const treffer = script && script.getAttribute('src').match(/v=([\w.-]+)/);
+    el('stand').textContent = 'Stand: v' + (treffer ? treffer[1] : '?');
   }
 
   function init() {
     buildList();
     preloadImages();
+    showVersion();
     load();
     if (state.pool.length === 0 && state.drawn.length === 0) reshuffle();
 
