@@ -253,6 +253,26 @@ section {
 
 .stand { margin: 14px 0 0; color: var(--muted); font-size: 0.8125rem; text-align: center; }
 
+/* Auf dem Handy sitzen drei Kaesten ineinander: Seitenrand, Abschnitt und
+   Zug-Kasten. Zusammen nehmen sie ein Viertel der Breite weg. Der Zug-Kasten
+   geht deshalb bis an die Raender des Abschnitts. */
+@media (max-width: 480px) {
+  section { padding: 12px; }
+
+  .draw {
+    margin: 0 -12px;
+    padding: 12px;
+    border-radius: 0;
+  }
+
+  .exercises li { gap: 8px; padding: 6px 2px; }
+  .exercises .figur { flex: 0 0 58px; width: 58px; }
+  .exercises .n { flex: 0 0 26px; height: 26px; }
+
+  .variante { margin-top: 12px; padding-top: 12px; }
+  .draw__nr { min-width: 50px; font-size: 2rem; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
   .btn:active { transform: none; }
