@@ -37,8 +37,8 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
    Abschnitt 2 der Seite).
 2. Alle tragen die Zahlen 1–16 selbst in ihre Papier-Bingokarte ein,
    jede Zahl genau einmal.
-3. Die Lehrkraft tippt auf **Ziehen**: es erscheint eine Übung mit Abbildung
-   plus Würfelzahl.
+3. Die Lehrkraft tippt auf **Ziehen**: es erscheint eine Übung mit Abbildung.
+   Im Hintergrund wird gewürfelt, die Zahl selbst wird nicht angezeigt.
    * Würfel **gerade** → dynamisch, 15–20 langsame Wiederholungen pro Seite.
    * Würfel **ungerade** → statisch, 30 Sekunden pro Seite halten.
    * Dazu erscheint die Kurzanleitung, passend zum Würfel. Die jeweils andere

@@ -129,7 +129,6 @@ section {
   margin: 10px auto 4px;
 }
 
-.draw__die { margin-top: 6px !important; color: var(--muted); font-size: 0.9375rem; }
 .draw__task { margin-top: 6px !important; font-weight: 600; }
 .draw__how { margin-top: 6px !important; }
 .draw__hint { margin-top: 6px !important; color: var(--muted); font-size: 0.9375rem; }

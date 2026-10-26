@@ -240,7 +240,6 @@
       el('drawTitle').textContent = 'Nr. ' + (current.ex + 1) + ' – ' + exercise.name;
       image.src = imagePath(current.ex);
       image.hidden = false;
-      el('drawDie').textContent = 'Würfel: ' + current.die + ' (' + (dynamic ? 'gerade' : 'ungerade') + ')';
       el('drawTask').textContent = dynamic
         ? 'Dynamisch: 15–20 langsame Wiederholungen pro Seite.'
         : 'Statisch: 30 Sekunden pro Seite halten.';
@@ -255,7 +254,6 @@
       el('drawTitle').textContent = 'Noch keine Übung gezogen.';
       image.removeAttribute('src');
       image.hidden = true;
-      el('drawDie').textContent = '';
       el('drawTask').textContent = '';
       el('drawHow').textContent = '';
       el('drawOtherText').textContent = '';
