@@ -39,6 +39,8 @@ Nur HTML, CSS und Vanilla-JavaScript – kein Build-Schritt, keine externen Bibl
    * Würfel **gerade** → dynamisch, 15–20 langsame Wiederholungen pro Seite.
    * Würfel **ungerade** → statisch, 30 Sekunden pro Seite halten
      (dafür gibt es den Stoppuhr-Knopf).
+   * Dazu erscheint die Kurzanleitung der Übung, passend zum Würfel.
+     Die jeweils andere Variante lässt sich darunter aufklappen.
 5. Alle machen die Übung mit und kreuzen die Zahl auf ihrer Karte an.
 6. Vier Kreuze in einer Reihe, Spalte oder Diagonale = **Bingo!**
    Die Gewinnreihe wird farbig hervorgehoben.

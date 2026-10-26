@@ -8,23 +8,88 @@
   const STORE_KEY = 'dehn-bingo.v1';
   const TIMER_MS = 30000;
 
+  // Name und Kurzanleitung je Übung (aus der Übungskarten-Übersicht).
   const EXERCISES = [
-    'Nacken seitlich',
-    'Hintere Schulter',
-    'Trizeps',
-    'Brust',
-    'Unterarm / Handgelenk',
-    'Seitneigung',
-    'Oberer Rücken',
-    'Katze (Katze-Kuh)',
-    'Kindhaltung',
-    'Drehsitz',
-    'Hüftbeuger',
-    'Oberschenkel vorn',
-    'Oberschenkel hinten',
-    'Gesäß (Figur 4)',
-    'Schmetterling',
-    'Wade'
+    {
+      name: 'Nacken seitlich',
+      statisch: 'Aufrechter Stand. Ohr zur Schulter neigen, Hand liegt nur sanft auf dem Kopf, die andere Schulter aktiv nach unten ziehen.',
+      dynamisch: 'Kopf langsam von Schulter zu Schulter pendeln.'
+    },
+    {
+      name: 'Hintere Schulter',
+      statisch: 'Arm gestreckt quer vor die Brust, die andere Hand zieht am Oberarm (nicht am Ellbogengelenk).',
+      dynamisch: 'Arme weit öffnen und vor der Brust überkreuzen.'
+    },
+    {
+      name: 'Trizeps',
+      statisch: 'Ellbogen zeigt nach oben, Hand liegt zwischen den Schulterblättern, die andere Hand schiebt den Ellbogen sanft nach hinten.',
+      dynamisch: 'Hand wandert in kleinen, kontrollierten Bewegungen am Rücken auf und ab.'
+    },
+    {
+      name: 'Brust',
+      statisch: 'Aufrecht stehen, Hände hinter dem Rücken verschränken, gestreckte Arme nach hinten-oben heben, Brustbein nach vorn.',
+      dynamisch: 'Arme in Schulterhöhe weit öffnen und vor der Brust wieder zusammenführen.'
+    },
+    {
+      name: 'Unterarm / Handgelenk',
+      statisch: 'Arm gestreckt nach vorn, Handfläche zeigt nach vorn (Finger nach oben); die andere Hand zieht die Finger sanft zum Körper.',
+      dynamisch: 'Handgelenk kreisen, Finger öffnen und schließen.'
+    },
+    {
+      name: 'Seitneigung',
+      statisch: 'Hüftbreit stehen, Knie leicht gebeugt. Rechten Arm gestreckt über den Kopf heben.',
+      dynamisch: 'Mit dem Arm über dem Kopf langsam von rechts nach links und zurück neigen.'
+    },
+    {
+      name: 'Oberer Rücken',
+      statisch: 'Hände vor der Brust verschränken, Arme nach vorn schieben, Rücken rund machen, Kopf zwischen die Arme.',
+      dynamisch: 'Arme weit öffnen und sich selbst umarmen, im Wechsel.'
+    },
+    {
+      name: 'Katze (Katze-Kuh)',
+      statisch: 'Vierfüßlerstand, Hände unter den Schultern, Knie unter der Hüfte. Rücken rund machen (Katze), Kinn zur Brust.',
+      dynamisch: 'Fließend zwischen Katze (rund) und Kuh (Hohlkreuz, Blick nach vorn) wechseln.'
+    },
+    {
+      name: 'Kindhaltung',
+      statisch: 'Auf die Fersen setzen, Oberkörper auf die Oberschenkel ablegen, Arme lang nach vorn. Gegendehnung nach Rückbeugen.',
+      dynamisch: 'Hände abwechselnd nach links und rechts wandern lassen.'
+    },
+    {
+      name: 'Drehsitz',
+      statisch: 'Langsitz. Ein Bein aufstellen und über das gestreckte Bein setzen, Gegenellbogen an das Knie, aufrichten und eindrehen, Blick über die Schulter.',
+      dynamisch: 'Beide Knie angewinkelt, von Seite zu Seite fallen lassen.'
+    },
+    {
+      name: 'Hüftbeuger',
+      statisch: 'Ausfallschritt, hinteres Knie am Boden (Unterlage), Becken nach vorn-unten schieben, Oberkörper aufrecht.',
+      dynamisch: 'Becken kontrolliert nach vorn schieben und zurück.'
+    },
+    {
+      name: 'Oberschenkel vorn',
+      statisch: 'Einbeinstand (ggf. festhalten), Ferse zum Gesäß ziehen, Knie zeigt nach unten, Hüfte nach vorn.',
+      dynamisch: 'Ferse langsam zum Gesäß ziehen und wieder lösen.'
+    },
+    {
+      name: 'Oberschenkel hinten',
+      statisch: 'Sitz, ein Bein gestreckt, das andere angewinkelt. Mit geradem Rücken aus der Hüfte nach vorn neigen.',
+      dynamisch: 'Im Stand das gestreckte Bein kontrolliert nach vorn pendeln.'
+    },
+    {
+      name: 'Gesäß (Figur 4)',
+      statisch: 'Rückenlage. Fuß auf das Gegenknie legen (Zahl 4), Oberschenkel des Standbeins zur Brust ziehen.',
+      dynamisch: 'Oberschenkel langsam heranziehen und wieder lösen.'
+    },
+    {
+      name: 'Schmetterling',
+      statisch: 'Sitz, Fußsohlen aneinander, Knie sinken nach außen, Rücken aufrecht.',
+      dynamisch: 'Knie sanft wie Schmetterlingsflügel auf und ab bewegen.'
+    },
+    {
+      name: 'Wade',
+      statisch: 'Schrittstellung an der Wand, hinteres Bein gestreckt, Ferse am Boden, Fußspitzen nach vorn, Hüfte nach vorn.',
+      dynamisch: 'Hinteres Knie abwechselnd leicht beugen und strecken.'
+    }
   ];
 
   /* ===================== Reine Logik (ohne DOM) ===================== */
@@ -227,14 +292,14 @@
 
   function buildList() {
     const frag = document.createDocumentFragment();
-    EXERCISES.forEach((name, i) => {
+    EXERCISES.forEach((exercise, i) => {
       const li = document.createElement('li');
       const num = document.createElement('span');
       num.className = 'n';
       num.textContent = String(i + 1);
       const label = document.createElement('span');
       label.className = 'name';
-      label.textContent = name;
+      label.textContent = exercise.name;
       li.append(num, label);
       frag.append(li);
       listItems.push(li);
@@ -307,6 +372,7 @@
     state.drawn.push(ex);
     state.current = { ex, die: rollDie() };
     state.roundNote = newRound ? 'Neue Runde: alle 16 waren dran, neu gemischt.' : '';
+    el('drawOther').open = false;
     resetTimerDisplay();
     render();
     save();
@@ -450,17 +516,27 @@
     const current = state.current;
     if (current) {
       const dynamic = isDynamic(current.die);
-      el('drawTitle').textContent = 'Nr. ' + (current.ex + 1) + ' – ' + EXERCISES[current.ex];
+      const exercise = EXERCISES[current.ex];
+      el('drawTitle').textContent = 'Nr. ' + (current.ex + 1) + ' – ' + exercise.name;
       el('drawDie').textContent = 'Würfel: ' + current.die + ' (' + (dynamic ? 'gerade' : 'ungerade') + ')';
       el('drawTask').textContent = dynamic
         ? 'Dynamisch: 15–20 langsame Wiederholungen pro Seite.'
         : 'Statisch: 30 Sekunden pro Seite halten.';
+      el('drawHow').textContent = dynamic ? exercise.dynamisch : exercise.statisch;
+      el('drawOtherSummary').textContent = dynamic
+        ? 'Statische Variante anzeigen'
+        : 'Dynamische Variante anzeigen';
+      el('drawOtherText').textContent = dynamic ? exercise.statisch : exercise.dynamisch;
+      el('drawOther').hidden = false;
       el('drawHint').textContent = 'Kreuze die ' + (current.ex + 1) + ' auf deiner Karte an.';
       el('timerBox').hidden = dynamic;
     } else {
       el('drawTitle').textContent = 'Noch keine Übung gezogen.';
       el('drawDie').textContent = '';
       el('drawTask').textContent = '';
+      el('drawHow').textContent = '';
+      el('drawOtherText').textContent = '';
+      el('drawOther').hidden = true;
       el('drawHint').textContent = '';
       el('timerBox').hidden = true;
     }

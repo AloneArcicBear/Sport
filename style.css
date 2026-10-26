@@ -214,7 +214,20 @@ body.mode-edit .cell__mark { display: none; }
 .draw__title { font-size: 1.2rem; font-weight: 700; line-height: 1.25; }
 .draw__die { margin-top: 6px !important; color: var(--muted); font-size: 0.9375rem; }
 .draw__task { margin-top: 6px !important; font-weight: 600; }
+.draw__how { margin-top: 6px !important; }
 .draw__hint { margin-top: 6px !important; color: var(--muted); font-size: 0.9375rem; }
+
+.draw__other { margin-top: 8px; }
+.draw__other summary {
+  display: flex;
+  align-items: center;
+  min-height: 36px;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.draw__other p { margin-top: 2px !important; color: var(--muted); font-size: 0.9375rem; }
 
 .timer {
   display: flex;
